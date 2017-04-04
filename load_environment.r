@@ -1,5 +1,6 @@
 library(twitteR)
 library(RMySQL)
+library(gtools)
 
 setwd("~/git/twitter-senti-bio")
 readRenviron(paste(getwd(), "/.Renviron", sep=""))
@@ -21,3 +22,9 @@ setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 register_mysql_backend("biotweets", "127.0.0.1", "root", "topkek")
 
 tweets <- userTimeline("754937215302631424", 5, excludeReplies = TRUE)
+
+tweetsDF <- twListToDF(tweets)
+
+orderedIds <- mixedorder(tweetsDF$id)
+
+minId <- tweetsDF$id[orderedIds[1]]
