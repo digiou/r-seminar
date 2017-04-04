@@ -28,3 +28,5 @@ tweetsDF <- twListToDF(tweets)
 orderedIds <- mixedorder(tweetsDF$id)
 
 minId <- tweetsDF$id[orderedIds[1]]
+
+olderTweets <- userTimeline("754937215302631424", 5, excludeReplies = TRUE, maxID = as.numeric(minId) - 1)
