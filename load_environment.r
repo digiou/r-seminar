@@ -15,7 +15,7 @@ db_user <- Sys.getenv("db_user")
 db_pass <- Sys.getenv("db_pass")
 db_name <- Sys.getenv("db_name")
 
-scientific_ids_table <- table(factor(c("754937215302631424")))
+scientific_ids_table <- array(c("754937215302631424"))
 
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 
