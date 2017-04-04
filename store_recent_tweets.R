@@ -40,7 +40,7 @@ register_mysql_backend("biotweets", "127.0.0.1", "root", "topkek")
 gatherAllTweets <- function(accountId) { 
     res = list()
     tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE)
-    res <- list(res, tweets)
+    res <- c(res, tweets)
     message(paste("GOT ", length(tweets), " elements!"))
     message("Sleeping for 5 minutes, got initial request!")
     Sys.sleep(300)
@@ -52,12 +52,12 @@ gatherAllTweets <- function(accountId) {
        if(length(tweets) == 0) {
          print("GOT ZERO")
        } else if(length(tweets) < 100 && length(tweets) >= 1){
-         res <- list(res, tweets)
+         res <- c(res, tweets)
          message(paste("GOT ", length(tweets), " elements!"))
          message("got low count of tweets!")
          tweets = list()
        } else {
-         res <- list(res, tweets)
+         res <- c(res, tweets)
          message(paste("GOT ", length(tweets), " elements!"))
          message("Sleeping for 5 minutes, got a request!")
          Sys.sleep(300)
