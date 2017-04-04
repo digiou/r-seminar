@@ -41,7 +41,7 @@ gatherAllTweets <- function(accountId) {
     res = list()
     tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE)
     res <- list(res, tweets)
-    print(paste("GOT ", length(tweets), " elements!"))
+    message(paste("GOT ", length(tweets), " elements!"))
     message("Sleeping for 5 minutes, got initial request!")
     Sys.sleep(300)
     while(length(tweets) != 0) {
@@ -53,12 +53,12 @@ gatherAllTweets <- function(accountId) {
          print("GOT ZERO")
        } else if(length(tweets) < 100 && length(tweets) >= 1){
          res <- list(res, tweets)
-         print(paste("GOT ", length(tweets), " elements!"))
+         message(paste("GOT ", length(tweets), " elements!"))
          message("got low count of tweets!")
          tweets = list()
        } else {
          res <- list(res, tweets)
-         print(paste("GOT ", length(tweets), " elements!"))
+         message(paste("GOT ", length(tweets), " elements!"))
          message("Sleeping for 5 minutes, got a request!")
          Sys.sleep(300)
        }
@@ -83,4 +83,11 @@ gatherAllTweetsWithTry <- function(accountId) {
   }
   )
   return(out)
+}
+
+for (account_id in scientific_ids_table) {
+  message(paste("Getting tweets for user: ", account_id))
+  tweets <- gatherAllTweetsWithTry(account_id)
+  store_tweets_db(tweets)
+  message("Done")
 }
