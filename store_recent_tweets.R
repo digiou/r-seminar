@@ -51,7 +51,7 @@ gatherAllTweets <- function(accountId) {
        tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE, maxID = as.numeric(minId) - 1)
        if(length(tweets) == 0) {
          print("GOT ZERO")
-       } else if(length(tweets) < 100 && length(tweets) >= 1){
+       } else if(length(tweets) < 20 && length(tweets) >= 1){
          res <- c(res, tweets)
          message(paste("GOT ", length(tweets), " elements!"))
          message("got low count of tweets!")
