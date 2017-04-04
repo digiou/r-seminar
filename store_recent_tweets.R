@@ -55,7 +55,7 @@ gatherAllTweets <- function(accountId) {
   res <- c(res, tweets)
   message(paste("GOT ", length(tweets), " elements!"))
   message("Sleeping for 1 minute, got initial request!")
-  Sys.sleep(300)
+  Sys.sleep(60)
   while(length(tweets) != 0) {
     tweetsDF <- twListToDF(tweets)
     orderedIds <- mixedorder(tweetsDF$id)
