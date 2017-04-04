@@ -30,3 +30,34 @@ orderedIds <- mixedorder(tweetsDF$id)
 minId <- tweetsDF$id[orderedIds[1]]
 
 olderTweets <- userTimeline("754937215302631424", 5, excludeReplies = TRUE, maxID = as.numeric(minId) - 1)
+
+gatherAllTweets <- function(accountId) { 
+       res = list()
+       tweets <- userTimeline(accountId, 1, excludeReplies = TRUE)
+       res <- list(res, tweets)
+       while(length(tweets) != 0) {
+           tweetsDF <- twListToDF(tweets)
+           orderedIds <- mixedorder(tweetsDF$id)
+           minId <- tweetsDF$id[orderedIds[1]]
+           tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE, maxID = as.numeric(minId) - 1)
+           if(length(tweets) == 0) {
+             print("GOT ZERO")
+           } else {
+             res <- list(res, tweets)
+             print(paste("GOT ", length(tweets), " elements!"))
+           }
+     }
+     return(res)
+}
+
+gatherAllTweetsWithTry <- function(accountId) {
+  out <- tryCatch({
+    gatherAllTweets(accountId)
+  },
+  warning=function(cond) {
+    message("Hit a warning, sleeping for 15 minutes")
+    Sys.sleep(630)
+    gatherAllTweetsWithTry(accountId)
+  }
+  )
+}
