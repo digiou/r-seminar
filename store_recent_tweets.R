@@ -43,7 +43,7 @@ orgz_ids_table <- array(c("15862891",
                           "29221344",
                           "3044804453",
                           "2292423140",
-                          ""))
+                          "19649135"))
 
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 
@@ -104,6 +104,8 @@ for (account_id in scientific_ids_table) {
   message(paste("Done with: ", account_id))
 }
 
+message("Done with scientific publishers!")
+
 register_mysql_backend("orgtweets", "127.0.0.1", "root", "topkek")
 
 for(account_id in orgz_ids_table) {
@@ -112,3 +114,5 @@ for(account_id in orgz_ids_table) {
   store_tweets_db(tweets)
   message(paste("Done with: ", account_id))
 }
+
+message("Done with organizations!")
