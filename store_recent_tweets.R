@@ -54,7 +54,7 @@ gatherAllTweets <- function(accountId) {
   tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE)
   res <- c(res, tweets)
   message(paste("GOT ", length(tweets), " elements!"))
-  message("Sleeping for 1 minute, got initial request!")
+  message("Sleeping for 30 seconds, got initial request!")
   Sys.sleep(30)
   while(length(tweets) != 0) {
     tweetsDF <- twListToDF(tweets)
@@ -71,7 +71,7 @@ gatherAllTweets <- function(accountId) {
     } else {
       res <- c(res, tweets)
       message(paste("GOT ", length(tweets), " elements!"))
-      message("Sleeping for 2 minutes, got a request!")
+      message("Sleeping for 1 minute, got a request!")
       Sys.sleep(60)
     }
   }
