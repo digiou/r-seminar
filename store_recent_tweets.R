@@ -36,7 +36,7 @@ orgz_ids_table <- array(c("15862891",
 
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 
-register_mysql_backend("scitweets", "127.0.0.1", "root", "topkek")
+register_mysql_backend(sci_db_name, "127.0.0.1", "root", "topkek")
 
 gatherAllTweets <- function(accountId) { 
   res = list()
@@ -51,7 +51,7 @@ gatherAllTweets <- function(accountId) {
     minId <- tweetsDF$id[orderedIds[1]]
     tweets <- userTimeline(accountId, 3200, excludeReplies = TRUE, maxID = as.numeric(minId) - 1)
     if(length(tweets) == 0) {
-      print("GOT ZERO")
+      message("GOT ZERO")
     } else if(length(tweets) < 20 && length(tweets) >= 1){
       res <- c(res, tweets)
       message(paste("GOT ", length(tweets), " elements!"))
@@ -64,7 +64,6 @@ gatherAllTweets <- function(accountId) {
       Sys.sleep(60)
     }
   }
-  message("Finished while loop")
   return(res)
 }
 
@@ -95,7 +94,7 @@ for (account_id in scientific_ids_table) {
 
 message("Done with scientific publishers!")
 
-register_mysql_backend("orgtweets", "127.0.0.1", "root", "topkek")
+register_mysql_backend(org_db_name, "127.0.0.1", "root", "topkek")
 
 for(account_id in orgz_ids_table) {
   message(paste("Getting tweets for user: ", account_id, " in public organizations"))

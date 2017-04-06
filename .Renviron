@@ -5,4 +5,5 @@ access_secret = "t2ODvyfsba5BZOIxbdIoPiKmNgSUeHuEAFcGtLh7hOBfk"
 
 db_user = "root"
 db_pass = "topkek"
-db_name = "biotweets"
+sci_db_name = "scitweets"
+org_db_name = "orgtweets"
