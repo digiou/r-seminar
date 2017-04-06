@@ -36,7 +36,7 @@ orgz_ids_table <- array(c("15862891",
 
 setup_twitter_oauth(api_key, api_secret, access_token, access_secret)
 
-register_mysql_backend(sci_db_name, "127.0.0.1", "root", "topkek")
+register_mysql_backend(sci_db_name, "127.0.0.1", db_user, db_pass)
 
 gatherAllTweets <- function(accountId) { 
   res = list()
@@ -94,7 +94,7 @@ for (account_id in scientific_ids_table) {
 
 message("Done with scientific publishers!")
 
-register_mysql_backend(org_db_name, "127.0.0.1", "root", "topkek")
+register_mysql_backend(org_db_name, "127.0.0.1", db_user, db_pass)
 
 for(account_id in orgz_ids_table) {
   message(paste("Getting tweets for user: ", account_id, " in public organizations"))
