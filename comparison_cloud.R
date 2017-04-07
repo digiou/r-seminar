@@ -47,6 +47,6 @@ corpus <- Corpus(VectorSource(all))
 
 tdm = TermDocumentMatrix(corpus)
 tdm = as.matrix(tdm)
-colnames(tdm) <- c("Scientists", "Pseudoscientists")
+colnames(tdm) <- c("Scientists", "Organizations")
 
 cloud <- comparison.cloud(tdm, random.order = FALSE, colors = c("blue", "red"), title.size = 1.5, max.words = 600)
