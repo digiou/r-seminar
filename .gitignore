@@ -12,3 +12,4 @@
 vignettes/*.html
 vignettes/*.pdf
 .httr-oauth
+.Renviron
